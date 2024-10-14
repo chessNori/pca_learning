@@ -14,10 +14,12 @@ config['mnist'] = {'data': 'mnist',
                    'n_components': 2}
 
 config['my_data'] = {'data': 'my_data',
+                     'frame_width': 17,
+                     'target': 'long',
                      'label': [0, 1],
                      'legend': ['short is better', 'long is better'],
                      'method': 'pca',
-                     'n_components': 2}
+                     'n_components': 5}
 
 data, label, model = None, None, None
 label_idx = list()
@@ -28,7 +30,7 @@ if config[test_id]['data'] == 'mnist':
     dataset = dataloader.MNIST()
     data, label = dataset.load_digits(config[test_id]['label'])
 elif config[test_id]['data'] == 'my_data':
-    dataset = dataloader.MyData()
+    dataset = dataloader.MyData(config[test_id]['frame_width'], config[test_id]['target'])
     data, label= dataset.data_load()
 
 for tag in config[test_id]['label']:
